@@ -1,5 +1,5 @@
 name: msgdistributor # 这是你的插件的唯一识别名。
-desc: 根据群id/好友名/好友id动态选择Provider的插件 # 插件简短描述
+desc: 根据消息平台-群id/好友名/好友id动态选择服务提供商 # 插件简短描述
 version: v1.0.0 # 插件版本号。格式：v1.1.1 或者 v1.1
 author: Dinggg # 作者
 repo: https://github.com/AAlexDing/astrbot_plugin_msgdistributor # 插件的仓库地址
