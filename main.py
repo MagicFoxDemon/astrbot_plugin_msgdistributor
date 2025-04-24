@@ -8,7 +8,7 @@ from typing import Dict, Optional
 @register(
     "msgdistributor",
     "Dinggg",
-    "根据群id/用户名动态选择Provider",
+    "根据群id/好友名/好友id动态选择Provider的插件",
     "1.0.0",
     "https://github.com/AAlexDing/astrbot_plugin_msgdistributor",
 )
@@ -85,14 +85,14 @@ class MsgDistributor(Star):
         provider = self._get_provider_for_group(platform, group_id)
         if provider:
             self._set_curr_provider(provider)
-            logger.info(f"消息平台{platform} - 群 {group_id} 已指向 Provider: {provider.meta().id}")
+            logger.info(f"消息分发：平台 {platform} - 群ID {group_id} 使用Provider {provider.meta().id}")
         else:
             default_provider = self._get_default_provider(platform)
             if default_provider:
                 self._set_curr_provider(default_provider)
-                logger.info(f"消息平台{platform} - 群 {group_id} 未指定Provider，采用默认Provider")
+                logger.info(f"消息分发：平台 {platform} - 群ID {group_id} 使用默认Provider")
             else:
-                logger.info(f"消息平台{platform} - 群 {group_id} 未指定Provider，采用系统Provider")
+                logger.info(f"消息分发：平台 {platform} - 群ID {group_id} 使用系统Provider")
 
     @filter.event_message_type(EventMessageType.PRIVATE_MESSAGE)
     async def on_private_message(self, event: AstrMessageEvent):
@@ -109,7 +109,7 @@ class MsgDistributor(Star):
         user_name = event.get_sender_name()
         user_id = event.get_sender_id()
 
-        if not user_name:
+        if not user_name and not user_id:
             return
 
         provider_by_name = self._get_provider_for_user(platform, user_name)
@@ -117,12 +117,12 @@ class MsgDistributor(Star):
         if provider_by_id or provider_by_name:
             provider = provider_by_id or provider_by_name
             self._set_curr_provider(provider)
-            logger.info(f"消息平台{platform} - 用户 {user_name}/{user_id} 已指向 Provider: {provider.meta().id}")
+            logger.info(f"消息分发：平台 {platform} - 用户名 {user_name} / 用户ID {user_id} 使用Provider {provider.meta().id}")
         else:
             default_provider = self._get_default_provider(platform)
             if default_provider:
                 self._set_curr_provider(default_provider)
-                logger.info(f"消息平台{platform} - 用户 {user_name}/{user_id} 未指定Provider，采用默认Provider")
+                logger.info(f"消息分发：平台 {platform} - 用户名 {user_name} / 用户ID {user_id} 使用默认Provider")
             else:
-                logger.info(f"消息平台{platform} - 用户 {user_name}/{user_id} 未指定Provider，采用系统Provider")
+                logger.info(f"消息分发：平台 {platform} - 用户名 {user_name} / 用户ID {user_id} 使用系统Provider")
 

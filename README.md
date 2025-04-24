@@ -1,20 +1,57 @@
 # MsgDistributor
-根据群id/好友名/好友id动态选择Provider
+
+根据群id/好友名/好友id动态选择Provider的插件。支持按照消息来源（群组/私聊）动态切换不同的AI服务提供商。
 
 
-## 配置
+## 配置说明
 
-- 默认服务提供商
-  - 注意：填入后会接管系统默认服务提供商，使用/provider进行的设置不再生效
+### 全局设置
 
-- 需消息分发的群组列表
-  - 格式：消息平台名::群id::服务提供商名
-  - 示例：gwchat::12345678@chatroom::dify_app_vv
+- `enable_distribute`: 布尔值，是否启用消息分发功能
+  - `true`: 启用消息分发
+  - `false`: 禁用消息分发（默认）
 
-- 需消息分发的应用好友列表
-  - 格式：消息平台名::好友id或好友名::服务提供商名
+### Provider设置
+
+- `default_provider`: 字符串，默认服务提供商ID
+  - 当消息来源未配置特定Provider时使用
+  - 留空则使用系统默认Provider
+  - 注意：设置后会覆盖通过`/provider`命令设置的默认Provider
+
+### 群组映射
+
+- `platform_group_provider_map`: 列表，群组消息分发配置
+  - 格式：`消息平台名::群id::服务提供商名`
+  - 示例：`gwchat::12345678@chatroom::dify_app_vv`
+  - 注意：群ID可以从日志中获取，目前只支持群ID形式
+
+### 好友映射
+
+- `platform_friend_provider_map`: 列表，私聊消息分发配置
+  - 格式：`消息平台名::好友id或好友名::服务提供商名`
   - 示例：
-    - gwchat::wxid_45526124::dify_app_vv
-    - gwchat::你干嘛唉哟::dify_app_cxk
+    - 使用好友ID：`gwchat::wxid_45526124::dify_app_vv`
+    - 使用好友名：`gwchat::你干嘛唉哟::dify_app_cxk`
+  - 注意：好友ID等信息可以从日志中获取
 
-群id、好友id、好友名看log即可
+## 配置示例
+
+```json
+{
+    "enable_distribute": true,
+    "default_provider": "openai_gpt4",
+    "platform_group_provider_map": [
+        "gwchat::12345678@chatroom::dify_app_vv",
+        "qq::87654321::claude_v2"
+    ],
+    "platform_friend_provider_map": [
+        "gwchat::wxid_45526124::dify_app_vv",
+        "telegram::user123::gpt4_turbo"
+    ]
+}
+```
+
+## 版本历史
+
+- v1.0.0
+  - 初始发布

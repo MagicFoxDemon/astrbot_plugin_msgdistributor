@@ -1,26 +1,26 @@
 {
     "enable_distribute": {
         "type": "bool",
-        "description": "启用",
+        "description": "是否启用消息分发功能",
         "default": false,
-        "hint": "全局设置是否启用消息分发"
+        "hint": "设置为true启用消息分发功能，false则所有消息使用系统默认Provider"
     },
     "default_provider":{
         "type": "string",
-        "description": "默认服务提供商",
+        "description": "默认服务提供商ID",
         "default": "",
-        "hint": "在未指定分发目标时使用的服务提供商，不填则由系统决定"
+        "hint": "当消息来源未配置特定Provider时使用的Provider ID，留空则使用系统默认Provider。注意：此设置会覆盖/provider命令的设置"
     },
     "platform_group_provider_map": {
         "type": "list",
-        "description": "需消息分发的群组列表",
+        "description": "群组消息分发配置",
         "default": [],
-        "hint": "格式：消息平台名::群id::服务提供商名"
+        "hint": "格式：消息平台名::群id::服务提供商名，示例：gwchat::12345678@chatroom::dify_app_vv"
     },
     "platform_friend_provider_map": {
         "type": "list",
-        "description": "需消息分发的应用好友列表",
+        "description": "私聊消息分发配置",
         "default": [],
-        "hint": "格式：消息平台名::好友id/好友名::服务提供商名"
+        "hint": "格式：消息平台名::好友id或好友名::服务提供商名，示例：gwchat::wxid_45526124::dify_app_vv"
     }
 }
