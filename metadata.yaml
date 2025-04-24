@@ -1,5 +1,5 @@
-name: helloworld # 这是你的插件的唯一识别名。
-desc: 这是 AstrBot 的默认插件，支持关键词回复。 # 插件简短描述
-version: v1.3 # 插件版本号。格式：v1.1.1 或者 v1.1
-author: Soulter # 作者
-repo: https://github.com/Soulter/helloworld # 插件的仓库地址
+name: msgdistributor # 这是你的插件的唯一识别名。
+desc: 根据群id/好友名/好友id动态选择Provider # 插件简短描述
+version: v1.0.0 # 插件版本号。格式：v1.1.1 或者 v1.1
+author: Dinggg # 作者
+repo: https://github.com/AAlexDing/astrbot_plugin_msgdistributor # 插件的仓库地址

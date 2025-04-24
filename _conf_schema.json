@@ -1,0 +1,26 @@
+{
+    "enable_distribute": {
+        "type": "bool",
+        "description": "启用",
+        "default": false,
+        "hint": "全局设置是否启用消息分发"
+    },
+    "default_provider":{
+        "type": "string",
+        "description": "默认服务提供商",
+        "default": "",
+        "hint": "在未指定分发目标时使用的服务提供商，不填则由系统决定"
+    },
+    "platform_group_provider_map": {
+        "type": "list",
+        "description": "需消息分发的群组列表",
+        "default": [],
+        "hint": "格式：消息平台名::群id::服务提供商名"
+    },
+    "platform_friend_provider_map": {
+        "type": "list",
+        "description": "需消息分发的应用好友列表",
+        "default": [],
+        "hint": "格式：消息平台名::好友id/好友名::服务提供商名"
+    }
+}
