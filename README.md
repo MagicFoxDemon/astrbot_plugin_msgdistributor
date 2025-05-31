@@ -2,6 +2,27 @@
 
 根据消息平台-群id/好友名/好友id动态选择服务提供商。
 
+# 分支说明
+Astrbot3.5.13更新后出现了
+:(
+
+在调用插件 msgdistributor 的处理函数 on_group_message 时出现异常：'ProviderManager' object has no attribute 'provider_enabled'
+的报错。
+将 main.py 文件中第 66 行的代码：
+
+<PYTHON>
+if not self.context.provider_manager.provider_enabled:
+    self.context.provider_manager.provider_enabled = True
+替换为：
+
+<PYTHON>
+if not self.context.get_using_provider():
+    # 这里可以添加一些处理逻辑，例如选择一个默认的 Provider
+    # 或者记录一条日志，提示用户没有启用 Provider
+    logger.warning("No provider is currently enabled.")
+
+即可正常运行。
+原理不明，能用就行。
 
 ## 配置说明
 
