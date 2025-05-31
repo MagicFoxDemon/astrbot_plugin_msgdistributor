@@ -22,8 +22,6 @@ if not self.context.provider_manager.provider_enabled:
 
 python
 if not self.context.get_using_provider():
-    # 这里可以添加一些处理逻辑，例如选择一个默认的 Provider
-    # 或者记录一条日志，提示用户没有启用 Provider
     logger.warning("No provider is currently enabled.")
 
 
